@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Asistencia</h1>
+
+        <form id="formAsistencia">
+            <label for="nombre">Nombre del estudiante:</label>
+            <input type="text" id="nombre" placeholder="Ingresa el nombre" required>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" required>
+
+            <label for="estado">Estado:</label>
+            <select id="estado" required>
+                <option value="">Seleccione</option>
+                <option value="Presente">Presente</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Ausente">Ausente</option>
+            </select>
+
+            <button type="submit">Registrar</button>
+        </form>
+
+        <h2>Lista de Asistencia</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="listaAsistencia">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const form = document.getElementById("formAsistencia");
+        const lista = document.getElementById("listaAsistencia");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let nombre = document.getElementById("nombre").value;
+            let fecha = document.getElementById("fecha").value;
+            let estado = document.getElementById("estado").value;
+
+            let fila = `
+                <tr>
+                    <td>${nombre}</td>
+                    <td>${fecha}</td>
+                    <td class="${estado.toLowerCase()}">${estado}</td>
+                </tr>
+            `;
+
+            lista.innerHTML += fila;
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
